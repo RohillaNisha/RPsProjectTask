@@ -10,6 +10,7 @@ public class RandomComputerPlayer extends Player implements ComputerPlayer {
     random = new Random();
   }
 
+
   @Override
   public String makeMove() {
     int randomNumber = random.nextInt(3);
