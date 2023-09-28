@@ -1,5 +1,6 @@
 package org.example.Menu;
 
+import org.example.RPSgameLogic;
 import org.example.player.HumanPlayer;
 import org.example.player.Player;
 
@@ -33,12 +34,13 @@ public class MainMenu extends Menu{
         System.out.println("STATISTICS ARE HERE");
     }
 
-    private void startGame() {
+    public void startGame() {
         String playerName;
        do{
            System.out.println("Enter Your Name: ");
             playerName = scanner.nextLine();
        } while(playerName.isEmpty());
+
         MenuSystem.setState(new GameMenu(playerName));
     }
 
