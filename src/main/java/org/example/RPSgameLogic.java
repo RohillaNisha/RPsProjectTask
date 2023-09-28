@@ -53,7 +53,7 @@ public class RPSgameLogic {
             String resultForOneRound = determineRoundWinner(humanMove, computerMove);
             System.out.println("You played: " + humanMove + " \n Computer played: " + computerMove + "\n");
             scoreUpdation(resultForOneRound, totalWinNeeded);
-            System.out.println("Current Score - "+ humanPlayer.getName().toUpperCase()+ ": " + humanScore + "     " + computerPlayer.getName().toUpperCase() + ": " + computerScore);
+            System.out.println("Current Score - "+ humanPlayer.getName().toUpperCase()+ ": " + humanScore + "     " + computerPlayer.getName().toUpperCase() + ": " + computerScore + "\n");
 
         }
 
