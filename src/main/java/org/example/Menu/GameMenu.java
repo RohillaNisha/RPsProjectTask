@@ -1,6 +1,7 @@
 package org.example.Menu;
 
 
+import org.example.RPSgameLogic;
 import org.example.player.*;
 
 import java.util.List;
@@ -32,31 +33,9 @@ public class GameMenu extends Menu{
         String computerMove = computerPlayer.makeMove();
         System.out.println("RANDOM BEAST HAS MADE ITS MOVE. \n IT'S YOUR TURN NOW!");
         String humanMove = humanPlayer.makeMove();
-        if(humanMove.equals(computerMove)){
-            System.out.println("Its a Tie! ");
-        }
-        else if (humanMove.equals("rock")) {
-            if(computerMove.equals("paper")){
-                System.out.println("You loose! ");
-            } else if(computerMove.equals("scissors")){
-                System.out.println("You win! ");
-            }
 
-        }
-        else if(humanMove.equals("paper")){
-            if(computerMove.equals("scissors")){
-                System.out.println("You loose! ");
-            } else if(computerMove.equals("rock")){
-                System.out.println("You Win! ");
-            }
-        }
-        else if(humanMove.equals("scissors")){
-            if(computerMove.equals("rock")){
-                System.out.println("You loose! ");
-            }
-            else if(computerMove.equals("paper")){
-                System.out.println("You Win! ");
-            }
-        }
+        RPSgameLogic game = new RPSgameLogic(humanMove, computerMove);
+        String result = game.determineRoundWinner();
+
     }
 }
