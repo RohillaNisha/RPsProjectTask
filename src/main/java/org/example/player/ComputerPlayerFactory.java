@@ -1,15 +1,17 @@
 package org.example.player;
 
+import org.example.moveStrategy.MoveStrategy;
+
 public class ComputerPlayerFactory {
-  public ComputerPlayer createRandomComputerPlayer(String name) {
-    return new RandomComputerPlayer(name);
+  public Player createRandomComputerPlayer(String name, MoveStrategy<Player> moveStrategy) {
+    return new RandomComputerPlayer(name, moveStrategy);
   }
 
-  public ComputerPlayer createTimeBasedComputerPlayer(String name) {
-    return new TimeBaseComputerPlayer(name);
+  public Player createTimeBasedComputerPlayer(String name, MoveStrategy<Player> moveStrategy) {
+    return new TimeBaseComputerPlayer(name, moveStrategy);
   }
 
-  public ComputerPlayer createNameBasedComputerPlayer(String name) {
-    return new NameBasedComputerPlayer(name);
+  public Player createNameBasedComputerPlayer(String name, MoveStrategy<Player> moveStrategy) {
+    return new NameBasedComputerPlayer(name, moveStrategy);
   }
 }
