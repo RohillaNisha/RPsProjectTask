@@ -1,12 +1,9 @@
 package org.example.player;
 
-public class RandomComputerPlayer extends Player implements ComputerPlayer {
-  public RandomComputerPlayer(String name) {
-    super(name);
-  }
+import org.example.moveStrategy.MoveStrategy;
 
-  @Override
-  public String makeMove() {
-    return null;
+public class RandomComputerPlayer extends Player {
+  public RandomComputerPlayer(String name, MoveStrategy<Player> moveStrategy) {
+    super(name, moveStrategy);
   }
 }

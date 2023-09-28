@@ -1,12 +1,17 @@
 package org.example.player;
 
+import org.example.moveStrategy.MoveStrategy;
+
 public class Player {
   private String name;
   private int score;
   private int totalRounds;
 
-  public Player(String name) {
+  private MoveStrategy<Player> moveStrategy;
+
+  public Player(String name, MoveStrategy<Player> moveStrategy) {
     this.name = name;
+    this.moveStrategy = moveStrategy;
     this.score = 0;
     this.totalRounds = 0;
   }
@@ -33,5 +38,17 @@ public class Player {
 
   public void setTotalRounds(int totalRounds) {
     this.totalRounds = totalRounds;
+  }
+
+  public MoveStrategy<Player> getMoveStrategy() {
+    return moveStrategy;
+  }
+
+  public void setMoveStrategy(MoveStrategy<Player> moveStrategy) {
+    this.moveStrategy = moveStrategy;
+  }
+
+  public String makeMove(Player player) {
+    return moveStrategy.generateMove(player);
   }
 }

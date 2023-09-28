@@ -1,12 +1,9 @@
 package org.example.player;
 
-public class NameBasedComputerPlayer extends Player implements ComputerPlayer {
-  public NameBasedComputerPlayer(String name) {
-    super(name);
-  }
+import org.example.moveStrategy.MoveStrategy;
 
-  @Override
-  public String makeMove() {
-    return null;
+public class NameBasedComputerPlayer extends Player {
+  public NameBasedComputerPlayer(String name, MoveStrategy<Player> moveStrategy) {
+    super(name, moveStrategy);
   }
 }
