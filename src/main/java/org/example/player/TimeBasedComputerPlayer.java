@@ -1,12 +1,12 @@
 package org.example.player;
 
-import org.example.moveStrategy.RandomMoveStrategy;
+import org.example.moveStrategy.PlayerMoveStrategy;
+import org.example.moveStrategy.TimeBasedMoveStrategy;
 
-public class RandomComputerPlayer implements Player {
+public class TimeBasedComputerPlayer implements Player {
   private final String name;
-  private final RandomMoveStrategy moveStrategy;
-
-  public RandomComputerPlayer(String name, RandomMoveStrategy moveStrategy) {
+  private final PlayerMoveStrategy<Player> moveStrategy;
+  public TimeBasedComputerPlayer(String name, TimeBasedMoveStrategy moveStrategy) {
     this.name = name;
     this.moveStrategy = moveStrategy;
   }
@@ -15,6 +15,7 @@ public class RandomComputerPlayer implements Player {
   public String getName() {
     return name;
   }
+
   @Override
   public String makeMove(Player opponentPlayer) {
     if (moveStrategy != null) {

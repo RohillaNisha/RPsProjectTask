@@ -2,7 +2,7 @@ package org.example.moveStrategy;
 
 import org.example.player.Player;
 
-public class NameBasedMoveStrategy implements MoveStrategy<Player> {
+public class NameBasedMoveStrategy implements PlayerMoveStrategy<Player> {
   @Override
   public String generateMove(Player opponentPlayer) {
     String playerName = opponentPlayer.getName();
