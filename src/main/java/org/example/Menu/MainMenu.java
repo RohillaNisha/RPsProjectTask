@@ -1,9 +1,5 @@
 package org.example.Menu;
 
-import org.example.RPSgameLogic;
-import org.example.player.HumanPlayer;
-import org.example.player.Player;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,7 +23,7 @@ public class MainMenu extends Menu{
         System.out.println(" 2. Scissors wins against paper.");
         System.out.println(" 3. Paper wins against rock.");
         System.out.println("*********************************************** \n");
-        System.out.println(" Note:  If both players throw the same hand signal, it is considered a tie, and play resumes until there is a clear winner.");
+        System.out.println(" Note:  If both players throw the same hand signal, it is considered a tie, and play resumes until there is a clear winner.\n");
     }
 
     private void gameStatistics() {

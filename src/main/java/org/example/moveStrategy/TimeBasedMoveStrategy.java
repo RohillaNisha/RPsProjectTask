@@ -1,11 +1,12 @@
 package org.example.moveStrategy;
 
+import org.example.player.Player;
+
 import java.util.Calendar;
 import java.util.Random;
 import java.util.TimeZone;
-import org.example.player.Player;
 
-public class TimeBasedMoveStrategy implements MoveStrategy<Player> {
+public class TimeBasedMoveStrategy implements PlayerMoveStrategy<Player> {
   @Override
   public String generateMove(Player player) {
     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());

@@ -4,7 +4,7 @@ import org.example.player.Player;
 
 import java.util.Scanner;
 
-public class HumanPlayerMoveStrategy implements MoveStrategy<Player> {
+public class HumanPlayerMoveStrategy implements PlayerMoveStrategy<Player> {
   @Override
   public String generateMove(Player player) {
     String[] moves = {"rock", "paper, scissors"};

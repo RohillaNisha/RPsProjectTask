@@ -1,5 +1,5 @@
 package org.example.moveStrategy;
 
-public interface MoveStrategy<T> {
+public interface PlayerMoveStrategy<T> {
     String generateMove(T player);
 }

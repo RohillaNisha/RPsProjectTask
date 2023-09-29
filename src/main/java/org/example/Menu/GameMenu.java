@@ -5,11 +5,8 @@ import org.example.RPSgameLogic;
 
 public class GameMenu extends Menu {
 
-    private String playerName;
-
     public GameMenu(String playerName) {
         super("Game Menu");
-        this.playerName = playerName;
         System.out.println("Hello, " + playerName + " ! Choose Your Opponent ");
         menuOptions =
                 List.of(
