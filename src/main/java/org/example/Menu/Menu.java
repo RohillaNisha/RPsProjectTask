@@ -15,13 +15,23 @@ public class Menu implements MenuState{
     @Override
     public void execute() {
         displayMenuOptions();
-        Scanner input = new Scanner(System.in);
-        int optionSelected = input.nextInt();
-        for(MenuOption menuOption: menuOptions){
-            if(menuOption.getOptionNumber() == optionSelected){
-                menuOption.run();
-            }
-        }
+        boolean validInput = false;
+        while(!validInput){
+         Scanner input = new Scanner(System.in);
+         if (input.hasNextInt()) {
+         int optionSelected = input.nextInt();
+         if(optionSelected > 4 || optionSelected <= 0){
+             System.out.println("Please chose valid option number between 1 to 4:");}
+         else{
+             validInput = true;
+         for(MenuOption menuOption: menuOptions){
+             if(menuOption.getOptionNumber() == optionSelected){
+                 menuOption.run();
+             }}}}
+         else{
+                 System.out.println("Please enter a valid integer");
+             }
+         }
 
     }
 

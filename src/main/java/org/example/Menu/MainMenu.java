@@ -10,6 +10,9 @@ public class MainMenu extends Menu {
   private static final Scanner scanner = new Scanner(System.in);
   private final GameStatistics statistics = new GameStatistics();
 
+
+  private static String playerName = "";
+
   public MainMenu() {
     super("Main Menu");
     menuOptions =
@@ -19,6 +22,8 @@ public class MainMenu extends Menu {
             new MenuOption(3, "See Game Rules", () -> gameRules()),
             new MenuOption(4, "SAYONARA!! ", () -> System.exit(0)));
   }
+
+
 
   private void gameRules() {
     System.out.println("***********************************************");
@@ -31,11 +36,10 @@ public class MainMenu extends Menu {
   }
 
   public void startGame() {
-    String playerName;
-    do {
+    while (playerName.isEmpty()) {
       System.out.println("Enter Your Name: ");
       playerName = scanner.nextLine();
-    } while (playerName.isEmpty());
+    }
 
     MenuSystem.setState(new GameMenu(playerName, statistics));
   }
