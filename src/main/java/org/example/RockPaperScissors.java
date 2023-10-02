@@ -1,3 +1,16 @@
 package org.example;
 
-public class RockPaperScissors {}
+import org.example.Menu.MenuSystem;
+
+public class RockPaperScissors {
+
+  public static void main(String[] args) {
+
+    System.out.println("\n \n........ROCK PAPER SCISSORS........ \n \n");
+
+    MenuSystem menuSystem = MenuSystem.getInstance();
+    while (true) {
+      menuSystem.execute();
+    }
+  }
+}
