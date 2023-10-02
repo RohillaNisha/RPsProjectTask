@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import org.example.moveStrategy.HumanPlayerMoveStrategy;
 import org.example.moveStrategy.NameBasedMoveStrategy;
@@ -8,15 +10,20 @@ import org.example.moveStrategy.TimeBasedMoveStrategy;
 import org.example.player.ComputerPlayerFactory;
 import org.example.player.HumanPlayer;
 import org.example.player.Player;
+import org.example.statistics.GameStatistics;
+import org.example.statistics.RoundHistory;
 
 public class RPSgameLogic {
   private static int selectedComputerPlayerType;
+  private final GameStatistics statistics;
+  private final List<RoundHistory> roundHistoryList = new ArrayList<>();
   private HumanPlayer humanPlayer;
   private Player computerPlayer;
   private int humanScore;
   private int computerScore;
 
-  public RPSgameLogic(int selectedComputerPlayerType) {
+  public RPSgameLogic(GameStatistics statistics, int selectedComputerPlayerType) {
+    this.statistics = statistics;
     RPSgameLogic.selectedComputerPlayerType = selectedComputerPlayerType;
   }
 
@@ -37,13 +44,15 @@ public class RPSgameLogic {
 
     int totalWinNeeded = getDesiredWinCount();
 
-    while (!isGameOver(totalWinNeeded)) {
+    while (!isMatchOver(totalWinNeeded)) {
       playOneRound();
       displayCurrentScores();
     }
-
-    String gameWinner = determineGameWinner();
-    displayGameResult(gameWinner);
+    Player matchWinner = determineMatchWinner();
+    String matchWinnerName = matchWinner.getName();
+    displayMatchResult(matchWinnerName);
+    statistics.updateStatistics(matchWinner, computerPlayer);
+    displayRoundHistory();
   }
 
   private void playOneRound() {
@@ -51,17 +60,40 @@ public class RPSgameLogic {
     String humanMove = humanPlayer.makeMove(computerPlayer);
     String resultForOneRound = determineRoundWinner(humanMove, computerMove);
     updateScore(resultForOneRound);
+    roundHistoryList.add(
+        new RoundHistory(
+            humanPlayer.getName(),
+            humanMove,
+            computerPlayer.getName(),
+            computerMove,
+            humanScore,
+            computerScore));
 
     System.out.println(humanPlayer.getName() + " played: " + humanMove);
     System.out.println(computerPlayer.getName() + " played: " + computerMove);
-    System.out.println("Result: " + resultForOneRound);
-    System.out.println();
+    System.out.println("Result: " + resultForOneRound + "\n");
   }
 
   private int getDesiredWinCount() {
-    System.out.println("Enter desired number of Wins to declare a Winner: ");
-    Scanner scanner = new Scanner(System.in);
-    return scanner.nextInt();
+    int desiredWinCount = 0;
+    boolean validInput = false;
+
+    while (!validInput) {
+      System.out.print("Enter desired number of Wins to declare a Winner: ");
+      Scanner scanner = new Scanner(System.in);
+
+      if (scanner.hasNextInt()) {
+        desiredWinCount = scanner.nextInt();
+        if (desiredWinCount >= 0) {
+          validInput = true;
+        } else {
+          System.out.println("Please enter a non-negative integer.");
+        }
+      } else {
+        System.out.println("Please enter a valid integer.");
+      }
+    }
+    return desiredWinCount;
   }
 
   private void displayCurrentScores() {
@@ -77,9 +109,34 @@ public class RPSgameLogic {
             + "\n");
   }
 
-  private void displayGameResult(String gameWinner) {
+  private void displayRoundHistory() {
+    System.out.println("\n ROUND HISTORY");
+    roundHistoryList.forEach(
+        (round) -> {
+          System.out.println(
+              round.getHumanPlayerName()
+                  + ": "
+                  + round.getHumanPlayerMove()
+                  + "        "
+                  + round.getComputerPlayerName()
+                  + ": "
+                  + round.getComputerPlayerMove()
+                  + "   "
+                  + "MATCH SCORE : "
+                  + round.getHumanPlayerName().toUpperCase()
+                  + ": "
+                  + round.getHumanPlayerScore()
+                  + "       "
+                  + round.getComputerPlayerName().toUpperCase()
+                  + ": "
+                  + round.getComputerPlayerScore());
+        });
+    System.out.println("\n");
+  }
+
+  private void displayMatchResult(String MatchWinner) {
     System.out.println("....GAME OVER...");
-    System.out.println(gameWinner + " is the winner!");
+    System.out.println(MatchWinner + " is the winner!");
   }
 
   public String determineRoundWinner(String humanMove, String computerMove) {
@@ -104,17 +161,15 @@ public class RPSgameLogic {
     }
   }
 
-  public boolean isGameOver(int totalWinNeeded) {
+  public boolean isMatchOver(int totalWinNeeded) {
     return computerScore == totalWinNeeded || humanScore == totalWinNeeded;
   }
 
-  public String determineGameWinner() {
+  public Player determineMatchWinner() {
     if (humanScore > computerScore) {
-      return humanPlayer.getName();
-    } else if (computerScore > humanScore) {
-      return computerPlayer.getName();
+      return humanPlayer;
     } else {
-      return "TIE";
+      return computerPlayer;
     }
   }
 }
