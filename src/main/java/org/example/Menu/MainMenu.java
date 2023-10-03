@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MainMenu extends Menu {
 
   private static final Scanner scanner = new Scanner(System.in);
-  private final GameStatistics statistics = new GameStatistics();
+  private static final GameStatistics statistics = new GameStatistics();
 
 
   private static String playerName = "";
