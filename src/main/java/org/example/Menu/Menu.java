@@ -20,8 +20,8 @@ public class Menu implements MenuState{
          Scanner input = new Scanner(System.in);
          if (input.hasNextInt()) {
          int optionSelected = input.nextInt();
-         if(optionSelected > 4 || optionSelected <= 0){
-             System.out.println("Please chose valid option number between 1 to 4:");}
+         if(optionSelected > 5 || optionSelected <= 0){
+             System.out.println("Please chose valid option number between 1 to 5:");}
          else{
              validInput = true;
          for(MenuOption menuOption: menuOptions){
