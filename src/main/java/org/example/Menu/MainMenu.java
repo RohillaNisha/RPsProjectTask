@@ -68,10 +68,14 @@ public class MainMenu extends Menu {
     players.add(new ComputerPlayerFactory().createTimeBasedComputerPlayer("Time Master", new TimeBasedMoveStrategy()));
     players.add(new ComputerPlayerFactory().createNameBasedComputerPlayer("Tactics Master", new NameBasedMoveStrategy()));
 
-    Node tournamentTree = BinaryTreeTournament.createTournamentTree(players);
 
-    BinaryTreeTournament.inOrderTransversal(tournamentTree);
-    Player winner = BinaryTreeTournament.runGame(tournamentTree);
-    System.out.println("Tournament Winner: " + winner.getName());
+    Node root = BinaryTreeTournament.createTournamentList(players);
+
+    Player finalWinner = BinaryTreeTournament.runTournament(root);
+
+    System.out.println( finalWinner + " wins the Tournament. "
+    );
+
+
   }
 }
